@@ -1,6 +1,6 @@
 # Datacenter Ticketing
 
-![tests](https://github.com/Polarwanda/dc-ticketing.git)
+[![tests](https://github.com/Polarwanda/dc-ticketing/actions/workflows/tests.yml/badge.svg)](https://github.com/Polarwanda/dc-ticketing/actions/workflows/tests.yml)
 
 A lightweight ticket system for datacenter operations, with a command-line tool and a Flask web UI. Its headline feature is **redundancy conflict detection**: it stops two separate tickets from taking down both power feeds of the same rack.
 
@@ -27,7 +27,7 @@ Racks are usually powered by two independent feeds (A and B) so one can fail wit
 Requires Python 3.10+.
 
 ```bash
-git clone https://github.com/YOUR-USERNAME/dc-ticketing.git
+git clone https://github.com/Polarwanda/dc-ticketing.git
 cd dc-ticketing
 python -m venv .venv && source .venv/bin/activate   # Windows: .venv\Scripts\activate
 pip install -r requirements.txt
@@ -85,7 +85,3 @@ tests/           unittest suite
 - Conflict detection covers power feeds only. Network pairs and cooling redundancy are natural extensions.
 - Feed data is entered manually. Syncing from a DCIM tool such as NetBox would remove that step.
 - Ideas: email/Slack alerts on SLA breach, scan-to-close with asset barcodes, ticket-to-ticket links.
-
-## License
-
-MIT (add a `LICENSE` file when you create the repo on GitHub).
