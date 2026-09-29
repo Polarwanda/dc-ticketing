@@ -1,0 +1,6 @@
+__pycache__/
+*.pyc
+tickets.db
+.venv/
+.env
+.pytest_cache/

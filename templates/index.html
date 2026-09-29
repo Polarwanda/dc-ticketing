@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Tickets</h2>
+<form method="get" class="card">
+  <select name="status">
+    <option value="">Any status</option>
+    {% for s in statuses %}<option {{ 'selected' if f.status == s }}>{{ s }}</option>{% endfor %}
+  </select>
+  <select name="priority">
+    <option value="">Any priority</option>
+    {% for p in PRIORITIES %}<option {{ 'selected' if f.priority == p }}>{{ p }}</option>{% endfor %}
+  </select>
+  <input name="tech" placeholder="Technician" value="{{ f.tech or '' }}">
+  <input name="site" placeholder="Site" value="{{ f.site or '' }}">
+  <input name="asset_tag" placeholder="Asset tag" value="{{ f.asset_tag or '' }}">
+  <button>Filter</button>
+</form>
+<div class="table-wrap">
+<table>
+  <tr><th>ID</th><th>Priority</th><th>Status</th><th>SLA</th><th>Location</th><th>Tech</th><th>Title</th></tr>
+  {% for t in tickets %}
+  {% set state = sla_state(t) %}
+  <tr>
+    <td><a href="{{ url_for('ticket', ticket_id=t.id) }}">#{{ t.id }}</a></td>
+    <td>{{ t.priority }}</td>
+    <td>{{ t.status }}</td>
+    <td><span class="badge {{ state }}">{{ state|replace('_', ' ') }}</span></td>
+    <td>{{ t.site or '-' }} / {{ t.rack or '-' }}{% if t.feed %} ({{ t.feed }}){% endif %}</td>
+    <td>{{ t.assignee or '-' }}</td>
+    <td>{{ t.title }}</td>
+  </tr>
+  {% else %}
+  <tr><td colspan="7">No tickets found.</td></tr>
+  {% endfor %}
+</table>
+</div>
+{% endblock %}

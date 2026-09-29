@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>#{{ t.id }} {{ t.title }}</h2>
+{% if conflicts and t.status != 'in_progress' %}
+<div class="warn">
+  Redundancy risk:
+  {% for c in conflicts %}<a href="{{ url_for('ticket', ticket_id=c.id) }}">#{{ c.id }}</a> {% endfor %}
+  in progress on the opposite feed of this rack. Starting this ticket needs an override reason.
+</div>
+{% endif %}
+{% set state = sla_state(t) %}
+<div class="card">
+  <p><b>Type:</b> {{ t.type }} | <b>Priority:</b> {{ t.priority }} | <b>Status:</b> {{ t.status }}</p>
+  <p><b>Location:</b> {{ t.site or '-' }} / {{ t.rack or '-' }} / feed {{ t.feed or '-' }}</p>
+  <p><b>Asset:</b>
+    {% if t.asset_tag %}<a href="{{ url_for('index', asset_tag=t.asset_tag) }}">{{ t.asset_tag }}</a>{% else %}-{% endif %}
+  </p>
+  <p><b>Assignee:</b> {{ t.assignee or '-' }}</p>
+  <p><b>SLA:</b> <span class="badge {{ state }}">{{ state|replace('_', ' ') }}</span> due {{ t.due }}</p>
+</div>
+<div class="card">
+  <form method="post" action="{{ url_for('assign', ticket_id=t.id) }}">
+    <input name="tech" placeholder="Technician" required>
+    <button>Assign</button>
+  </form>
+  {% if next_statuses %}
+  <form method="post" action="{{ url_for('status', ticket_id=t.id) }}">
+    <select name="new_status">{% for s in next_statuses %}<option>{{ s }}</option>{% endfor %}</select>
+    <input name="override_reason" placeholder="Override reason (only if conflict)">
+    <button>Change status</button>
+  </form>
+  {% endif %}
+  <form method="post" action="{{ url_for('comment', ticket_id=t.id) }}">
+    <input name="text" placeholder="Add a comment" required style="width:60%">
+    <button>Comment</button>
+  </form>
+</div>
+<div class="card">
+  <h3>History</h3>
+  <ul>{% for h in history %}<li>[{{ h.time }}] {{ h.note }}</li>{% endfor %}</ul>
+</div>
+{% endblock %}

@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>New ticket</h2>
+<form method="post" class="card">
+  <label>Title</label>
+  <input name="title" required style="width:100%">
+  <label>Type</label>
+  <select name="type">{% for t in TYPES %}<option>{{ t }}</option>{% endfor %}</select>
+  <label>Priority</label>
+  <select name="priority">
+    {% for p in PRIORITIES %}<option {{ 'selected' if p == 'medium' }}>{{ p }}</option>{% endfor %}
+  </select>
+  <label>Linked asset (fills in site, rack and feed)</label>
+  <select name="asset_tag">
+    <option value="">None</option>
+    {% for a in assets %}<option value="{{ a.asset_tag }}">{{ a.asset_tag }} - {{ a.name }}</option>{% endfor %}
+  </select>
+  <label>Site / Rack / Feed (optional if an asset is linked)</label>
+  <input name="site" placeholder="Site">
+  <input name="rack" placeholder="Rack">
+  <select name="feed"><option value="">Feed</option>{% for f in FEEDS %}<option>{{ f }}</option>{% endfor %}</select>
+  <p><button>Create ticket</button></p>
+</form>
+{% endblock %}
