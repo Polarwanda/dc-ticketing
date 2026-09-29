@@ -27,7 +27,7 @@ Racks are usually powered by two independent feeds (A and B) so one can fail wit
 Requires Python 3.10+.
 
 ```bash
-git clone https://github.com/YOUR-USERNAME/dc-ticketing.git
+git clone https://github.com/Polarwanda/dc-ticketing.git
 cd dc-ticketing
 python -m venv .venv && source .venv/bin/activate   # Windows: .venv\Scripts\activate
 pip install -r requirements.txt
