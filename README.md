@@ -1,6 +1,6 @@
 # Datacenter Ticketing
 
-![tests](https://github.com/YOUR-USERNAME/dc-ticketing/actions/workflows/tests.yml/badge.svg)
+![tests](https://github.com/Polarwanda/dc-ticketing.git)
 
 A lightweight ticket system for datacenter operations, with a command-line tool and a Flask web UI. Its headline feature is **redundancy conflict detection**: it stops two separate tickets from taking down both power feeds of the same rack.
 
