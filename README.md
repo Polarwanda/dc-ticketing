@@ -85,7 +85,3 @@ tests/           unittest suite
 - Conflict detection covers power feeds only. Network pairs and cooling redundancy are natural extensions.
 - Feed data is entered manually. Syncing from a DCIM tool such as NetBox would remove that step.
 - Ideas: email/Slack alerts on SLA breach, scan-to-close with asset barcodes, ticket-to-ticket links.
-
-## License
-
-MIT (add a `LICENSE` file when you create the repo on GitHub).
