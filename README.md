@@ -4,10 +4,10 @@
 
 A lightweight ticket system for datacenter operations, with a command-line tool and a Flask web UI. Its headline feature is **redundancy conflict detection**: it stops two separate tickets from taking down both power feeds of the same rack.
 
-<!-- Add screenshots after running seed_demo.py, then uncomment:
-![Dashboard](docs/dashboard.png)
-![Redundancy warning](docs/redundancy-warning.png)
--->
+
+![Dashboard](docs\Dashboard.png)
+![Redundancy warning](docs\redundancy-warning.png)
+
 
 ## The problem it solves
 
